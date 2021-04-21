@@ -9,6 +9,9 @@ import retrofit2.http.*
 
 interface NetworkApiClient {
 
+    @GET("me")
+    fun getUser(): Deferred<PSParcelUser>
+
     @GET("terminals")
     fun getTerminals(
         @Query("country") country: String?,

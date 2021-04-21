@@ -12,6 +12,8 @@ class ParcelApiClient(
     apiRequestManager: ApiRequestManager
 ) : BaseApiClient(apiRequestManager) {
 
+    fun getUser() = networkApiClient.getUser()
+
     fun getTerminals(filter: PSTerminalsFilter) = networkApiClient.getTerminals(
         filter.country,
         filter.limit,
