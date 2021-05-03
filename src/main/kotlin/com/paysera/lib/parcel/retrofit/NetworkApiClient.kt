@@ -9,11 +9,11 @@ import retrofit2.http.*
 
 interface NetworkApiClient {
 
-    @GET("me")
-    fun getUser(): Deferred<PSParcelUser>
+	@GET("me")
+	fun getUser(): Deferred<PSParcelUser>
 
-    @GET("terminals")
-    fun getTerminals(
+	@GET("terminals")
+	fun getTerminals(
         @Query("country") country: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?,
@@ -23,52 +23,52 @@ interface NetworkApiClient {
         @Query("before") before: String?,
     ): Deferred<MetadataAwareResponse<PSTerminal>>
 
-    @GET("terminals/{terminalId}")
-    fun getTerminal(
+	@GET("terminals/{terminalId}")
+	fun getTerminal(
         @Path("terminalId") terminalId: String
     ): Deferred<PSTerminal>
 
-    @GET("terminals/{terminalId}/sizes")
-    fun getTerminalSizes(
+	@GET("terminals/{terminalId}/sizes")
+	fun getTerminalSizes(
         @Path("terminalId") terminalId: String
     ): Deferred<MetadataAwareResponse<PSTerminalSize>>
 
-    @POST("packages")
-    fun registerPackage(
+	@POST("packages")
+	fun registerPackage(
         @Body `package`: PSPackage
     ): Deferred<PSPackage>
 
-    @GET("packages/{package_id}")
-    fun getPackage(
+	@GET("packages/{package_id}")
+	fun getPackage(
         @Path("package_id") packageId: String
     ): Deferred<PSPackage>
 
-    @PUT("packages/{package_id}")
-    fun updatePackage(
+	@PUT("packages/{package_id}")
+	fun updatePackage(
         @Path("package_id") packageId: String,
         @Body `package`: PSPackage
     ): Deferred<PSPackage>
 
-    @PUT("packages/{package_id}/unlock")
-    fun unlockPackage(
+	@PUT("packages/{package_id}/unlock")
+	fun unlockPackage(
         @Path("package_id") packageId: String,
     ): Deferred<Response<Void>>
 
-    @GET("packages/{package_id}/events")
-    fun getPackageEvents(
+	@GET("packages/{package_id}/events")
+	fun getPackageEvents(
         @Path("package_id") packageId: String,
     ): Deferred<MetadataAwareResponse<PSPackageEvent>>
 
-    @GET("packages/{package_id}/return")
-    fun createPackageReturn(
+	@GET("packages/{package_id}/return")
+	fun createPackageReturn(
         @Path("package_id") packageId: String,
     ): Deferred<PSPackage>
 
-    @GET("cell-sizes")
-    fun getCellSizes(): Deferred<MetadataAwareResponse<PSCellSize>>
+	@GET("cell-sizes")
+	fun getCellSizes(): Deferred<MetadataAwareResponse<PSCellSize>>
 
-    @GET("price")
-    fun getPrice(
+	@GET("price")
+	fun getPrice(
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?,
         @Query("order_by") orderBy: String?,
@@ -77,11 +77,11 @@ interface NetworkApiClient {
         @Query("before") before: String?,
     ): Deferred<Money>
 
-    @GET("countries")
-    fun getCountries(): Deferred<MetadataAwareResponse<PSCountry>>
+	@GET("countries")
+	fun getCountries(): Deferred<MetadataAwareResponse<PSCountry>>
 
-    @GET("countries/{countryCode}/cities")
-    fun getCities(
+	@GET("countries/{countryCode}/cities")
+	fun getCities(
         @Path("countryCode") countryCode: String,
-    ): Deferred<PSCity>
+    ): Deferred<MetadataAwareResponse<PSCity>>
 }
