@@ -83,5 +83,5 @@ interface NetworkApiClient {
     @GET("countries/{countryCode}/cities")
     fun getCities(
         @Path("countryCode") countryCode: String,
-    ): Deferred<PSPackage>
+    ): Deferred<PSCity>
 }

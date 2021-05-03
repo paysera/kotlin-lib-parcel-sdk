@@ -20,5 +20,6 @@ data class PSPackage(
     val price: Money,
     val payment: PSPackagePayment,
     val createdAt: Date?,
-    val updatedAt: Date?
+    val updatedAt: Date?,
+	val paidAt: Date?
 )
