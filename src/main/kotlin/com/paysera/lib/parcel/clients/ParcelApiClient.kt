@@ -1,5 +1,6 @@
 package com.paysera.lib.parcel.clients
 
+import kotlinx.coroutines.Deferred
 import com.paysera.lib.parcel.retrofit.NetworkApiClient
 import com.paysera.lib.common.retrofit.ApiRequestManager
 import com.paysera.lib.common.retrofit.BaseApiClient
@@ -48,7 +49,7 @@ class ParcelApiClient(
 
 	fun getCities(countryCode: String) = networkApiClient.getCities(countryCode)
 
-	fun registerPackage(`package`: PSPackage, payOnReceive: Boolean): PSPackage {
+	fun registerPackage(`package`: PSPackage, payOnReceive: Boolean): Deferred<PSPackage> {
 		`package`.payOnReceive = payOnReceive
 		return networkApiClient.registerPackage(`package`)
 	}
@@ -56,7 +57,7 @@ class ParcelApiClient(
 	fun updatePackage(
         `package`: PSPackage,
         payOnReceive: Boolean
-    ): PSPackage {
+    ): Deferred<PSPackage> {
 		`package`.payOnReceive = payOnReceive
 		return networkApiClient.updatePackage(`package`)
 	}

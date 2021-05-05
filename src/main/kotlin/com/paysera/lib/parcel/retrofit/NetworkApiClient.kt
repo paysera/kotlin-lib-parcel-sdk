@@ -48,7 +48,7 @@ interface NetworkApiClient {
 
 	@GET("price")
 	fun getPrice(
-		@Query("cell_size") cellSize: String,
+		@Query("cell_size") cellSize: String?,
 		@Query("limit") limit: Int?,
 		@Query("offset") offset: Int?,
 		@Query("order_by") orderBy: String?,
