@@ -21,5 +21,6 @@ data class PSPackage(
 	val payment: PSPackagePayment,
 	val createdAt: Date?,
 	val updatedAt: Date?,
-	val paidAt: Date?
+	val paidAt: Date?,
+	var payOnReceive: Boolean?
 )

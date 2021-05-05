@@ -2,8 +2,8 @@ package com.paysera.lib.parcel.entities.filters
 
 import com.paysera.lib.common.entities.BaseFilter
 
-class PSTerminalsFilter(
-	val country: String? = null,
+class PSPackagePriceFilter(
+	val cellSize: String? = null,
 	offset: Int? = null,
 	limit: Int? = null,
 	orderBy: String? = null,
