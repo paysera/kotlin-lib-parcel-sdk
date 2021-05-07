@@ -1,6 +1,6 @@
 package com.paysera.lib.parcel.entities
 
-import java.util.*
+import java.util.Date
 
 data class PSPackageEvent(
     val status: String,
