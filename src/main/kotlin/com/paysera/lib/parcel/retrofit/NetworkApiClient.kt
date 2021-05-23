@@ -70,9 +70,10 @@ interface NetworkApiClient {
         @Body `package`: PSPackage,
     ): Deferred<PSPackage>
 
-    @PUT("packages/{`package`.id}")
+    @PUT("packages/{package_id}")
     fun updatePackage(
         @Body `package`: PSPackage,
+        @Path("package_id") packageId: String = `package`.id!!,
     ): Deferred<PSPackage>
 
     @PUT("packages/{package_id}/unlock")

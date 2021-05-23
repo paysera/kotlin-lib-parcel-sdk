@@ -1,15 +1,11 @@
 package com.paysera.lib.parcel.clients
 
 import com.paysera.lib.parcel.entities.PSPackage
-import com.paysera.lib.parcel.entities.PSPackagePayment
 import com.paysera.lib.parcel.entities.filters.PSPackagePriceFilter
 import com.paysera.lib.parcel.entities.filters.PSTerminalsFilter
 import com.paysera.lib.parcel.runCatchingBlocking
-import org.joda.money.CurrencyUnit
-import org.joda.money.Money
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import java.util.Date
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class ParcelTest : BaseTest() {
@@ -18,7 +14,7 @@ internal class ParcelTest : BaseTest() {
     private val terminalId = "insert_here"
     private val packageId = "insert_here"
     private val cellSize = "insert_here"
-    private val parcel = PSPackage(
+    private val parcelToRegister = PSPackage(
         id = "insert_here",
         packageNumber = "insert_here",
         senderName = "insert_here",
@@ -30,16 +26,13 @@ internal class ParcelTest : BaseTest() {
         sourceTerminalId = "insert_here",
         destinationTerminalId = "insert_here",
         size = "insert_here",
-        price = Money.zero(CurrencyUnit.EUR),
+        price = null,
         paidAt = null,
         pinCode = null,
-        payment = PSPackagePayment(
-            paymentNumber = "insert_here",
-            paymentUrl = "insert_here",
-            status = "insert_here"),
-        status = "insert_here",
-        createdAt = Date(0),
-        updatedAt = Date(0),
+        payment = null,
+        status = null,
+        createdAt = null,
+        updatedAt = null,
         payOnReceive = null
     )
 
@@ -81,7 +74,7 @@ internal class ParcelTest : BaseTest() {
         val response = apiClient.getPackage(packageId).runCatchingBlocking()
         val result = response.getOrNull()
         assert(response.isSuccess)
-//		assert(result?.id == packageId)
+        assert(result?.id == packageId)
     }
 
     @Test
@@ -89,7 +82,7 @@ internal class ParcelTest : BaseTest() {
         val response = apiClient.getPackageEvents(packageId).runCatchingBlocking()
         val result = response.getOrNull()
         assert(response.isSuccess)
-//		assert(result?.items?.size != null)
+        assert(result?.items?.size != null)
     }
 
     @Test
@@ -127,18 +120,20 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun registerPackage() {
-        val response = apiClient.registerPackage(parcel, payOnReceive = false).runCatchingBlocking()
-        val result = response.getOrNull()
+        val response = apiClient.registerPackage(parcelToRegister, payOnReceive = false).runCatchingBlocking()
         assert(response.isSuccess)
-//		assert(result?.id == packageId)
     }
 
     @Test
     fun updatePackage() {
-        val response = apiClient.updatePackage(parcel, payOnReceive = true).runCatchingBlocking()
-        val result = response.getOrNull()
-        assert(response.isSuccess)
-//		assert(result?.id == packageId)
+        val response = apiClient.registerPackage(parcelToRegister, payOnReceive = false).runCatchingBlocking()
+        val packageRegistered = response.getOrNull()
+        if (packageRegistered != null) {
+            val response2 = apiClient.updatePackage(packageRegistered, payOnReceive = true).runCatchingBlocking()
+            val result = response2.getOrNull()
+            assert(response2.isSuccess)
+            assert(result?.id == packageRegistered.id)
+        }
     }
 
     @Test
@@ -150,8 +145,6 @@ internal class ParcelTest : BaseTest() {
     @Test
     fun createPackageReturn() {
         val response = apiClient.createPackageReturn(packageId).runCatchingBlocking()
-        val result = response.getOrNull()
         assert(response.isSuccess)
-//		assert(result?.id == packageId")
     }
 }
