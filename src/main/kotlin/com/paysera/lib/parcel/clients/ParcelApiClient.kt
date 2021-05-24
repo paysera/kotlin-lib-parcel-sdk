@@ -13,9 +13,9 @@ class ParcelApiClient(
     apiRequestManager: ApiRequestManager
 ) : BaseApiClient(apiRequestManager) {
 
-	fun getUser() = networkApiClient.getUser()
+    fun getUser() = networkApiClient.getUser()
 
-	fun getTerminals(filter: PSTerminalsFilter) = networkApiClient.getTerminals(
+    fun getTerminals(filter: PSTerminalsFilter) = networkApiClient.getTerminals(
         filter.country,
         filter.limit,
         filter.offset,
@@ -25,44 +25,44 @@ class ParcelApiClient(
         filter.before
     )
 
-	fun getTerminal(terminalId: String) = networkApiClient.getTerminal(terminalId)
+    fun getTerminal(terminalId: String) = networkApiClient.getTerminal(terminalId)
 
-	fun getTerminalSizes(terminalId: String) = networkApiClient.getTerminalSizes(terminalId)
+    fun getTerminalSizes(terminalId: String) = networkApiClient.getTerminalSizes(terminalId)
 
-	fun getPackage(packageId: String) = networkApiClient.getPackage(packageId)
+    fun getPackage(packageId: String) = networkApiClient.getPackage(packageId)
 
-	fun getPackageEvents(packageId: String) = networkApiClient.getPackageStatusChanges(packageId)
+    fun getPackageEvents(packageId: String) = networkApiClient.getPackageStatusChanges(packageId)
 
-	fun getCellSizes() = networkApiClient.getCellSizes()
+    fun getCellSizes() = networkApiClient.getCellSizes()
 
-	fun getPrice(filter: PSPackagePriceFilter) = networkApiClient.getPrice(
+    fun getPrice(filter: PSPackagePriceFilter) = networkApiClient.getPrice(
         filter.cellSize,
-		filter.limit,
-		filter.offset,
-		filter.orderBy,
-		filter.orderDirection,
-		filter.after,
-		filter.before
+        filter.limit,
+        filter.offset,
+        filter.orderBy,
+        filter.orderDirection,
+        filter.after,
+        filter.before
     )
 
-	fun getCountries() = networkApiClient.getCountries()
+    fun getCountries() = networkApiClient.getCountries()
 
-	fun getCities(countryCode: String) = networkApiClient.getCities(countryCode)
+    fun getCities(countryCode: String) = networkApiClient.getCities(countryCode)
 
-	fun registerPackage(`package`: PSPackage, payOnReceive: Boolean): Deferred<PSPackage> {
-		`package`.payOnReceive = payOnReceive
-		return networkApiClient.registerPackage(`package`)
-	}
+    fun registerPackage(`package`: PSPackage, payOnReceive: Boolean): Deferred<PSPackage> {
+        `package`.payOnReceive = payOnReceive
+        return networkApiClient.registerPackage(`package`)
+    }
 
-	fun updatePackage(
+    fun updatePackage(
         `package`: PSPackage,
         payOnReceive: Boolean
     ): Deferred<PSPackage> {
-		`package`.payOnReceive = payOnReceive
-		return networkApiClient.updatePackage(`package`)
-	}
+        `package`.payOnReceive = payOnReceive
+        return networkApiClient.updatePackage(`package`)
+    }
 
-	fun unlockPackage(packageId: String) = networkApiClient.unlockPackage(packageId)
+    fun unlockPackage(packageId: String) = networkApiClient.unlockPackage(packageId)
 
-	fun createPackageReturn(packageId: String) = networkApiClient.createPackageReturn(packageId)
+    fun createPackageReturn(packageId: String) = networkApiClient.createPackageReturn(packageId)
 }

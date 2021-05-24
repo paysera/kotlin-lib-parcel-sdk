@@ -39,7 +39,6 @@ internal class ParcelTest : BaseTest() {
     @Test
     fun getUser() {
         val response = apiClient.getUser().runCatchingBlocking()
-        val result = response.getOrNull()
         assert(response.isSuccess)
     }
 
