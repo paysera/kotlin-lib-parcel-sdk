@@ -20,7 +20,7 @@ interface NetworkApiClient {
         @Query("order_by") orderBy: String?,
         @Query("order_direction") orderDirection: String?,
         @Query("after") after: String?,
-        @Query("before") before: String?,
+        @Query("before") before: String?
     ): Deferred<MetadataAwareResponse<PSTerminal>>
 
     @GET("terminals/{terminalId}")
@@ -40,7 +40,7 @@ interface NetworkApiClient {
 
     @GET("packages/{package_id}/events")
     fun getPackageStatusChanges(
-        @Path("package_id") packageId: String,
+        @Path("package_id") packageId: String
     ): Deferred<MetadataAwareResponse<PSPackageEvent>>
 
     @GET("cell-sizes")
@@ -62,18 +62,18 @@ interface NetworkApiClient {
 
     @GET("countries/{countryCode}/cities")
     fun getCities(
-        @Path("countryCode") countryCode: String,
+        @Path("countryCode") countryCode: String
     ): Deferred<MetadataAwareResponse<PSCity>>
 
     @POST("packages")
     fun registerPackage(
-        @Body `package`: PSPackage,
+        @Body `package`: PSPackage
     ): Deferred<PSPackage>
 
     @PUT("packages/{package_id}")
     fun updatePackage(
         @Body `package`: PSPackage,
-        @Path("package_id") packageId: String = `package`.id!!,
+        @Path("package_id") packageId: String = `package`.id!!
     ): Deferred<PSPackage>
 
     @PUT("packages/{package_id}/unlock")
@@ -83,6 +83,6 @@ interface NetworkApiClient {
 
     @PUT("packages/{package_id}/return")
     fun createPackageReturn(
-        @Path("package_id") packageId: String,
+        @Path("package_id") packageId: String
     ): Deferred<PSPackage>
 }
