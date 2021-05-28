@@ -20,7 +20,6 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -31,7 +30,7 @@ dependencies {
     implementation 'org.joda:joda-money:0.12'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.7.2'
 
-    implementation('com.github.paysera:kotlin-lib-common-sdk:2.5.0') {
+    implementation('com.paysera.lib:kotlin-lib-common-sdk:2.6.1') {
         exclude group: 'org.json', module: 'json'
     }
 
