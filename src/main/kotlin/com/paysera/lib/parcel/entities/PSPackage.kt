@@ -1,10 +1,12 @@
 package com.paysera.lib.parcel.entities
 
+import com.paysera.lib.parcel.entities.enums.PSPackageStatus
 import org.joda.money.Money
-import java.util.Date
+import java.util.*
 
 data class PSPackage(
     val id: String?,
+    val hashType: String,
     val packageNumber: String?,
     val senderName: String,
     val senderPhone: String,
@@ -12,15 +14,16 @@ data class PSPackage(
     val receiverName: String,
     val receiverPhone: String,
     val receiverEmail: String,
-    val status: String?,
-    val sourceTerminalId: String,
-    val destinationTerminalId: String,
+    val receiverLanguage: String?,
+    val sourceTerminal: PSTerminal?,
+    val destinationTerminal: PSTerminal?,
     val size: String,
-    val pinCode: String?,
+    val cell: PSCell?,
     val price: Money?,
     val payment: PSPackagePayment?,
+    val statusChanges: List<PSStatusChange>?,
+    val paidAt: Date?,
     val createdAt: Date?,
     val updatedAt: Date?,
-    val paidAt: Date?,
-    var payOnReceive: Boolean?
+    val status: PSPackageStatus?
 )

@@ -1,5 +1,3 @@
 package com.paysera.lib.parcel.entities
 
-data class PSCity(
-    val city: String
-)
+data class PSCity(val city: String)

@@ -9,9 +9,6 @@ import retrofit2.http.*
 
 interface NetworkApiClient {
 
-    @GET("me")
-    fun getUser(): Deferred<PSParcelUser>
-
     @GET("terminals")
     fun getTerminals(
         @Query("country") country: String?,
@@ -23,15 +20,38 @@ interface NetworkApiClient {
         @Query("before") before: String?
     ): Deferred<MetadataAwareResponse<PSTerminal>>
 
-    @GET("terminals/{terminalId}")
+    @GET("terminals/{terminal_id}")
     fun getTerminal(
-        @Path("terminalId") terminalId: String
+        @Path("terminal_id") terminalId: String
     ): Deferred<PSTerminal>
 
-    @GET("terminals/{terminalId}/sizes")
+    @GET("terminals/{terminal_id}/cells")
+    fun getTerminalCells(
+        @Path("terminal_id") terminalId: String
+    ): Deferred<MetadataAwareResponse<PSTerminalCell>>
+
+    @GET("terminals/{terminal_id}/sizes")
     fun getTerminalSizes(
-        @Path("terminalId") terminalId: String
+        @Path("terminal_id") terminalId: String
     ): Deferred<MetadataAwareResponse<PSTerminalSize>>
+
+    @GET("packages")
+    fun getPackages(
+        @Query("offset") offset: Int?,
+        @Query("limit") limit: Int?,
+        @Query("order_by") orderBy: String?,
+        @Query("order_direction") orderDirection: String?,
+        @Query("after") after: String?,
+        @Query("before") before: String?,
+        @Query("statuses") statuses: List<String>?,
+        @Query("receiver_phone_part") receiverPhonePart: String?,
+        @Query("created_at_from") fromCreatedAt: String?,
+        @Query("created_at_to") toCreatedAt: String?,
+        @Query("number") number: String?,
+        @Query("external_id") externalId: String?,
+        @Query("is_paid") isPaid: Boolean?,
+        @Query("is_receiver") isReceiver: Boolean?
+    ): Deferred<MetadataAwareResponse<PSPackage>>
 
     @GET("packages/{package_id}")
     fun getPackage(
@@ -41,14 +61,14 @@ interface NetworkApiClient {
     @GET("packages/{package_id}/events")
     fun getPackageStatusChanges(
         @Path("package_id") packageId: String
-    ): Deferred<MetadataAwareResponse<PSPackageEvent>>
+    ): Deferred<MetadataAwareResponse<PSStatusChange>>
 
     @GET("cell-sizes")
     fun getCellSizes(): Deferred<MetadataAwareResponse<PSCellSize>>
 
     @GET("price")
     fun getPrice(
-        @Query("cell_size") cellSize: String?,
+        @Query("cell_size") cellSize: String,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?,
         @Query("order_by") orderBy: String?,
@@ -58,22 +78,20 @@ interface NetworkApiClient {
     ): Deferred<Money>
 
     @GET("countries")
-    fun getCountries(): Deferred<MetadataAwareResponse<PSCountry>>
+    fun getCountries(): Deferred<MetadataAwareResponse<PSPackageCountry>>
 
-    @GET("countries/{countryCode}/cities")
+    @GET("countries/{country_code}/cities")
     fun getCities(
-        @Path("countryCode") countryCode: String
+        @Path("country_code") countryCode: String
     ): Deferred<MetadataAwareResponse<PSCity>>
 
-    @POST("packages")
-    fun registerPackage(
-        @Body `package`: PSPackage
-    ): Deferred<PSPackage>
+    @GET("me")
+    fun getUser(): Deferred<PSPackageUser>
 
     @PUT("packages/{package_id}")
     fun updatePackage(
-        @Body `package`: PSPackage,
-        @Path("package_id") packageId: String = `package`.id!!
+        @Path("package_id") packageId: String,
+        @Body packageRequest: PSPackageRequest
     ): Deferred<PSPackage>
 
     @PUT("packages/{package_id}/unlock")
@@ -82,7 +100,18 @@ interface NetworkApiClient {
     ): Deferred<Response<Void>>
 
     @PUT("packages/{package_id}/return")
-    fun createPackageReturn(
+    fun returnPackage(
         @Path("package_id") packageId: String
+    ): Deferred<PSPackage>
+
+    @POST("packages")
+    fun registerPackage(
+        @Body packageRequest: PSPackageRequest
+    ): Deferred<PSPackage>
+
+    @POST("packages/{package_id}/provide")
+    fun providePackage(
+        @Path("package_id") packageId: String,
+        @Body packageRequest: PSPackageRequest
     ): Deferred<PSPackage>
 }

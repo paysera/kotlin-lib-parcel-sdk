@@ -3,7 +3,7 @@ package com.paysera.lib.parcel.entities.filters
 import com.paysera.lib.common.entities.BaseFilter
 
 class PSPackagePriceFilter(
-    val cellSize: String? = null,
+    val cellSize: String,
     offset: Int? = null,
     limit: Int? = null,
     orderBy: String? = null,
