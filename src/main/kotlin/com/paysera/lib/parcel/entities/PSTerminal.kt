@@ -9,5 +9,6 @@ data class PSTerminal(
     val address: String,
     val workingHours: String,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    val model: String
 )
