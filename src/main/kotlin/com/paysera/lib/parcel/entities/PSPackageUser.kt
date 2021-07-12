@@ -9,7 +9,6 @@ data class PSPackageUser(
     val email: String?,
     val courierCompany: PSCourierCompany?,
     val mainTerminal: PSTerminal?,
-    val suspended: Boolean,
     val createdAt: Date,
     val updatedAt: Date?
 )

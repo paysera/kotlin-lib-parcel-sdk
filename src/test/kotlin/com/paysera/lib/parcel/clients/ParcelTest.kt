@@ -11,6 +11,28 @@ import org.junit.jupiter.api.TestInstance
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class ParcelTest : BaseTest() {
 
+    private val country = "LT"
+    private val terminalId = "TTJb0-zbCx8jT9FrDMT8rZv6i6VFmdylC"
+    private val packageId = "Hiy_sF9gUK9LPEDLieixhcO0SflDGx2br"
+    private val cellSize = "xxs"
+
+    private val packageRequest = PSPackageRequest(
+        senderName = "Sender Name",
+        senderPhone = "+1234567890",
+        senderEmail = "sender@email.com",
+        receiverName = "Receiver Name",
+        receiverPhone = "+1234567899",
+        receiverEmail = "receiver@email.com",
+        receiverLanguage = "LT",
+        sourceTerminalId = "TTJb0-zbCx8jT9FrDMT8rZv6i6VFmdylC",
+        destinationTerminalId = "TTJb0-zbCx8jT9FrDMT8rZv6i6VFmdylC",
+        size = "xxs",
+        cellId = null,
+        externalId = null,
+        sendNotifications = null,
+        payOnReceive = null
+    )
+
     @Test
     fun getUser() {
         val response = apiClient.getUser().runCatchingBlocking()
@@ -29,19 +51,19 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun getTerminal() {
-        val response = apiClient.getTerminal("insert_me").runCatchingBlocking()
+        val response = apiClient.getTerminal(terminalId).runCatchingBlocking()
         assert(response.isSuccess)
     }
 
     @Test
     fun getTerminalCells() {
-        val response = apiClient.getTerminalCells("insert_me").runCatchingBlocking()
+        val response = apiClient.getTerminalCells(terminalId).runCatchingBlocking()
         assert(response.isSuccess)
     }
 
     @Test
     fun getTerminalSizes() {
-        val response = apiClient.getTerminalSizes("insert_me").runCatchingBlocking()
+        val response = apiClient.getTerminalSizes(terminalId).runCatchingBlocking()
         val result = response.getOrNull()
         assert(response.isSuccess)
         assert(result?.items?.size != null)
@@ -55,13 +77,13 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun getPackage() {
-        val response = apiClient.getPackage("insert_me").runCatchingBlocking()
+        val response = apiClient.getPackage(packageId).runCatchingBlocking()
         assert(response.isSuccess)
     }
 
     @Test
     fun getPackageStatusChanges() {
-        val response = apiClient.getPackageStatusChanges("insert_me").runCatchingBlocking()
+        val response = apiClient.getPackageStatusChanges(packageId).runCatchingBlocking()
         val result = response.getOrNull()
         assert(response.isSuccess)
         assert(result?.items?.size != null)
@@ -77,7 +99,7 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun getPrice() {
-        val filter = PSPackagePriceFilter(cellSize = "m")
+        val filter = PSPackagePriceFilter(cellSize = cellSize)
         val response = apiClient.getPrice(filter).runCatchingBlocking()
         val result = response.getOrNull()
         assert(response.isSuccess)
@@ -94,7 +116,7 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun getCities() {
-        val response = apiClient.getCities("lt").runCatchingBlocking()
+        val response = apiClient.getCities(country).runCatchingBlocking()
         val result = response.getOrNull()
         assert(response.isSuccess)
         assert(result?.items?.size != null)
@@ -102,13 +124,13 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun registerPackage() {
-        val response = apiClient.registerPackage(PSPackageRequest(size = "m")).runCatchingBlocking()
+        val response = apiClient.registerPackage(packageRequest).runCatchingBlocking()
         assert(response.isSuccess)
     }
 
     @Test
     fun updatePackage() {
-        val response = apiClient.registerPackage(PSPackageRequest()).runCatchingBlocking()
+        val response = apiClient.registerPackage(packageRequest).runCatchingBlocking()
         val packageRegistered = response.getOrNull()
         if (packageRegistered != null) {
             val response2 = apiClient.updatePackage(
@@ -123,14 +145,14 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun unlockPackage() {
-        val response = apiClient.unlockPackage("insert_me").runCatchingBlocking()
+        val response = apiClient.unlockPackage(packageId).runCatchingBlocking()
         assert(response.isSuccess)
     }
 
     @Test
     fun providePackage() {
         val response = apiClient.providePackage(
-            "insert_me",
+            packageId,
             PSPackageRequest()
         ).runCatchingBlocking()
         assert(response.isSuccess)
@@ -138,7 +160,7 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun returnPackage() {
-        val response = apiClient.returnPackage("insert_me").runCatchingBlocking()
+        val response = apiClient.returnPackage(packageId).runCatchingBlocking()
         assert(response.isSuccess)
     }
 }
