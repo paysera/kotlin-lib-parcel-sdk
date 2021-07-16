@@ -43,7 +43,7 @@ interface NetworkApiClient {
         @Query("order_direction") orderDirection: String?,
         @Query("after") after: String?,
         @Query("before") before: String?,
-        @Query("statuses") statuses: List<String>?,
+        @Query("statuses[]") statuses: List<String>?,
         @Query("receiver_phone_part") receiverPhonePart: String?,
         @Query("created_at_from") fromCreatedAt: String?,
         @Query("created_at_to") toCreatedAt: String?,
@@ -114,4 +114,9 @@ interface NetworkApiClient {
         @Path("package_id") packageId: String,
         @Body packageRequest: PSPackageRequest
     ): Deferred<PSPackage>
+
+    @POST("refresh-token")
+    fun refreshToken(
+        @Body request: PSCourierCompanyTokenRequest
+    ): Deferred<Any>
 }

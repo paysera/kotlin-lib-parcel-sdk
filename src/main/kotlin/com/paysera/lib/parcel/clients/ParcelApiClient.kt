@@ -2,6 +2,7 @@ package com.paysera.lib.parcel.clients
 
 import com.paysera.lib.common.retrofit.ApiRequestManager
 import com.paysera.lib.common.retrofit.BaseApiClient
+import com.paysera.lib.parcel.entities.PSCourierCompanyTokenRequest
 import com.paysera.lib.parcel.entities.PSPackageRequest
 import com.paysera.lib.parcel.entities.filters.PSPackageFilter
 import com.paysera.lib.parcel.entities.filters.PSPackagePriceFilter
@@ -89,4 +90,6 @@ class ParcelApiClient(
     )
 
     fun returnPackage(packageId: String) = networkApiClient.returnPackage(packageId)
+
+    fun refreshToken(request: PSCourierCompanyTokenRequest) = networkApiClient.refreshToken(request)
 }

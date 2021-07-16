@@ -24,7 +24,7 @@ data class PSPackage(
     val payment: PSPackagePayment?,
     val statusChanges: MetadataAwareResponse<PSStatusChange>,
     val paidAt: Date?,
-    val createdAt: Date?,
+    val createdAt: Date,
     val updatedAt: Date?,
     val status: PSPackageStatus?
 )

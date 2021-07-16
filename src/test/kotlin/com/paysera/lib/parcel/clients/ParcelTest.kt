@@ -1,6 +1,8 @@
 package com.paysera.lib.parcel.clients
 
+import com.paysera.lib.parcel.entities.PSCourierCompanyTokenRequest
 import com.paysera.lib.parcel.entities.PSPackageRequest
+import com.paysera.lib.parcel.entities.enums.PSPackageStatus
 import com.paysera.lib.parcel.entities.filters.PSPackageFilter
 import com.paysera.lib.parcel.entities.filters.PSPackagePriceFilter
 import com.paysera.lib.parcel.entities.filters.PSTerminalsFilter
@@ -27,7 +29,7 @@ internal class ParcelTest : BaseTest() {
         sourceTerminalId = "TTJb0-zbCx8jT9FrDMT8rZv6i6VFmdylC",
         destinationTerminalId = "TTJb0-zbCx8jT9FrDMT8rZv6i6VFmdylC",
         size = "xxs",
-        cellId = null,
+        cellId = "1234",
         externalId = null,
         sendNotifications = null,
         payOnReceive = null
@@ -71,7 +73,13 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun getPackages() {
-        val response = apiClient.getPackages(PSPackageFilter()).runCatchingBlocking()
+        val filter = PSPackageFilter(
+            statuses = listOf(
+                PSPackageStatus.PENDING,
+                PSPackageStatus.CANCELED
+            )
+        )
+        val response = apiClient.getPackages(filter).runCatchingBlocking()
         assert(response.isSuccess)
     }
 
@@ -153,7 +161,7 @@ internal class ParcelTest : BaseTest() {
     fun providePackage() {
         val response = apiClient.providePackage(
             packageId,
-            PSPackageRequest()
+            packageRequest
         ).runCatchingBlocking()
         assert(response.isSuccess)
     }
@@ -161,6 +169,13 @@ internal class ParcelTest : BaseTest() {
     @Test
     fun returnPackage() {
         val response = apiClient.returnPackage(packageId).runCatchingBlocking()
+        assert(response.isSuccess)
+    }
+
+    @Test
+    fun refreshToken() {
+        val request = PSCourierCompanyTokenRequest("CONDN4XAG34Ifa3QV58TK03hAl__pBYRZj")
+        val response = apiClient.refreshToken(request).runCatchingBlocking()
         assert(response.isSuccess)
     }
 }
