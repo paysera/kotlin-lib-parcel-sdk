@@ -14,9 +14,10 @@ import org.junit.jupiter.api.TestInstance
 internal class ParcelTest : BaseTest() {
 
     private val country = "LT"
-    private val terminalId = "TTJb0-zbCx8jT9FrDMT8rZv6i6VFmdylC"
+    private val terminalId = "TesW6h3Pu0vGlgY3yypPWOXwx8CVRLil3"
     private val packageId = "Hiy_sF9gUK9LPEDLieixhcO0SflDGx2br"
     private val cellSize = "xxs"
+    private val courierCompany = "CONDN4XAG34Ifa3QV58TK03hAl__pBYRZj"
 
     private val packageRequest = PSPackageRequest(
         senderName = "Sender Name",
@@ -26,10 +27,10 @@ internal class ParcelTest : BaseTest() {
         receiverPhone = "+1234567899",
         receiverEmail = "receiver@email.com",
         receiverLanguage = "LT",
-        sourceTerminalId = "TTJb0-zbCx8jT9FrDMT8rZv6i6VFmdylC",
-        destinationTerminalId = "TTJb0-zbCx8jT9FrDMT8rZv6i6VFmdylC",
-        size = "xxs",
-        cellId = "1234",
+        sourceTerminalId = "TesW6h3Pu0vGlgY3yypPWOXwx8CVRLil3",
+        destinationTerminalId = "TesW6h3Pu0vGlgY3yypPWOXwx8CVRLil3",
+        size = "m",
+        cellId = "CQghzGePaPCMMmURnuUZKZ0nYn3EnpGOV",
         externalId = null,
         sendNotifications = null,
         payOnReceive = null
@@ -174,7 +175,7 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun refreshToken() {
-        val request = PSCourierCompanyTokenRequest("CONDN4XAG34Ifa3QV58TK03hAl__pBYRZj")
+        val request = PSCourierCompanyTokenRequest(courierCompany)
         val response = apiClient.refreshToken(request).runCatchingBlocking()
         assert(response.isSuccess)
     }
