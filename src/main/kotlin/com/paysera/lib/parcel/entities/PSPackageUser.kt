@@ -7,7 +7,7 @@ data class PSPackageUser(
     val name: String,
     val phoneNumber: String,
     val email: String?,
-    val courierCompany: PSCourierCompany?,
+    val courierCompanies: List<PSCourierCompany>?,
     val mainTerminal: PSTerminal?,
     val createdAt: Date,
     val updatedAt: Date?
