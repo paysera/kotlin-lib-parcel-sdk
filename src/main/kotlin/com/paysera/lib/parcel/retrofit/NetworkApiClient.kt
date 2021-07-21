@@ -118,5 +118,5 @@ interface NetworkApiClient {
     @POST("refresh-token")
     fun refreshToken(
         @Body request: PSCourierCompanyTokenRequest
-    ): Deferred<Any>
+    ): Deferred<PSCourierCompanyToken>
 }
