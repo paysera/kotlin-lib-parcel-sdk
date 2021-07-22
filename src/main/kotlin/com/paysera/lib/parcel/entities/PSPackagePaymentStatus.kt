@@ -9,6 +9,6 @@ enum class PSPackagePaymentStatus(val value: String) {
     AUTHORIZED("authorized"),
     @SerializedName("captured")
     CAPTURED("captured"),
-    @SerializedName("canceled")
-    CANCELED("canceled")
+    @SerializedName("cancelled")
+    CANCELLED("cancelled")
 }
