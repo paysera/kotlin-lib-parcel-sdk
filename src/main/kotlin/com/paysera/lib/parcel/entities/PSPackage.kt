@@ -18,7 +18,7 @@ data class PSPackage(
     val receiverLanguage: String?,
     val sourceTerminal: PSTerminal?,
     val destinationTerminal: PSTerminal?,
-    val size: String,
+    val size: String?,
     val cell: PSCell?,
     val price: Money?,
     val payment: PSPackagePayment?,
