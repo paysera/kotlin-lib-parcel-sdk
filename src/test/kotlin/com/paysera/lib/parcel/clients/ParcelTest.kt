@@ -3,6 +3,7 @@ package com.paysera.lib.parcel.clients
 import com.paysera.lib.parcel.entities.PSCourierCompanyTokenRequest
 import com.paysera.lib.parcel.entities.PSPackageRequest
 import com.paysera.lib.parcel.entities.enums.PSPackageStatus
+import com.paysera.lib.parcel.entities.filters.PSBaseCompanyFilter
 import com.paysera.lib.parcel.entities.filters.PSPackageFilter
 import com.paysera.lib.parcel.entities.filters.PSPackagePriceFilter
 import com.paysera.lib.parcel.entities.filters.PSTerminalsFilter
@@ -14,24 +15,24 @@ import org.junit.jupiter.api.TestInstance
 internal class ParcelTest : BaseTest() {
 
     private val country = "LT"
-    private val terminalId = "TesW6h3Pu0vGlgY3yypPWOXwx8CVRLil3"
-    private val packageId = "Hiy_sF9gUK9LPEDLieixhcO0SflDGx2br"
-    private val cellSize = "xxs"
-    private val courierCompany = "CONDN4XAG34Ifa3QV58TK03hAl__pBYRZj"
+    private val terminalId = ""//Mock terminal
+    private val packageId = ""
+    private val cellSize = ""
+    private val courierCompany = ""
 
     private val packageRequest = PSPackageRequest(
-        senderName = "Sender Name",
-        senderPhone = "+1234567890",
-        senderEmail = "sender@email.com",
+        senderName = "",
+        senderPhone = "+3709989898",
+        senderEmail = "",
         receiverName = "Receiver Name",
-        receiverPhone = "+1234567899",
+        receiverPhone = "+3709989898",
         receiverEmail = "receiver@email.com",
         receiverLanguage = "LT",
-        sourceTerminalId = "TesW6h3Pu0vGlgY3yypPWOXwx8CVRLil3",
-        destinationTerminalId = "TesW6h3Pu0vGlgY3yypPWOXwx8CVRLil3",
-        size = "m",
-        cellId = "CQghzGePaPCMMmURnuUZKZ0nYn3EnpGOV",
-        externalId = null,
+        sourceTerminalId = "",
+        destinationTerminalId = "",
+        size = "s",
+        cellId = "",
+        externalId = "",
         sendNotifications = null,
         payOnReceive = null
     )
@@ -44,7 +45,7 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun getTerminals() {
-        val filter = PSTerminalsFilter()
+        val filter = PSTerminalsFilter(courierCompanyId = courierCompany)
         val response = apiClient.getTerminals(filter).runCatchingBlocking()
         val result = response.getOrNull()
         assert(response.isSuccess)
@@ -60,13 +61,15 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun getTerminalCells() {
-        val response = apiClient.getTerminalCells(terminalId).runCatchingBlocking()
+        val filter = PSBaseCompanyFilter(courierCompanyId = courierCompany)
+        val response = apiClient.getTerminalCells(terminalId, filter).runCatchingBlocking()
         assert(response.isSuccess)
     }
 
     @Test
     fun getTerminalSizes() {
-        val response = apiClient.getTerminalSizes(terminalId).runCatchingBlocking()
+        val filter = PSBaseCompanyFilter(courierCompanyId = courierCompany)
+        val response = apiClient.getTerminalSizes(terminalId, filter).runCatchingBlocking()
         val result = response.getOrNull()
         assert(response.isSuccess)
         assert(result?.items?.size != null)
@@ -75,10 +78,8 @@ internal class ParcelTest : BaseTest() {
     @Test
     fun getPackages() {
         val filter = PSPackageFilter(
-            statuses = listOf(
-                PSPackageStatus.PENDING,
-                PSPackageStatus.CANCELED
-            )
+            externalId = "",
+            courierCompanyId = courierCompany
         )
         val response = apiClient.getPackages(filter).runCatchingBlocking()
         assert(response.isSuccess)

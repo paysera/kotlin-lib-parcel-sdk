@@ -1,18 +1,16 @@
 package com.paysera.lib.parcel.entities.filters
 
-class PSTerminalsFilter(
-    val country: String? = null,
-    val city: String? = null,
-    val address: String? = null,
-    courierCompanyId: String? = null,
+import com.paysera.lib.common.entities.BaseFilter
+
+open class PSBaseCompanyFilter(
+    var courierCompanyId: String? = null,
     offset: Int? = null,
     limit: Int? = null,
     orderBy: String? = null,
     orderDirection: String? = null,
     after: String? = null,
     before: String? = null
-) : PSBaseCompanyFilter(
-    courierCompanyId = courierCompanyId,
+) : BaseFilter(
     offset = offset,
     limit = limit,
     orderBy = orderBy,

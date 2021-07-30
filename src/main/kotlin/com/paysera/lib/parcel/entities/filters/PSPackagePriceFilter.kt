@@ -9,7 +9,7 @@ class PSPackagePriceFilter(
     orderBy: String? = null,
     orderDirection: String? = null,
     after: String? = null,
-    before: String? = null,
+    before: String? = null
 ) : BaseFilter(
     offset = offset,
     limit = limit,

@@ -12,6 +12,9 @@ interface NetworkApiClient {
     @GET("terminals")
     fun getTerminals(
         @Query("country") country: String?,
+        @Query("city") city: String?,
+        @Query("address") address: String?,
+        @Query("courier_company_id") courierCompanyId: String?,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?,
         @Query("order_by") orderBy: String?,
@@ -27,12 +30,26 @@ interface NetworkApiClient {
 
     @GET("terminals/{terminal_id}/cells")
     fun getTerminalCells(
-        @Path("terminal_id") terminalId: String
+        @Path("terminal_id") terminalId: String,
+        @Query("courier_company_id") courierCompanyId: String?,
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?,
+        @Query("order_by") orderBy: String?,
+        @Query("order_direction") orderDirection: String?,
+        @Query("after") after: String?,
+        @Query("before") before: String?
     ): Deferred<MetadataAwareResponse<PSTerminalCell>>
 
     @GET("terminals/{terminal_id}/sizes")
     fun getTerminalSizes(
-        @Path("terminal_id") terminalId: String
+        @Path("terminal_id") terminalId: String,
+        @Query("courier_company_id") courierCompanyId: String?,
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?,
+        @Query("order_by") orderBy: String?,
+        @Query("order_direction") orderDirection: String?,
+        @Query("after") after: String?,
+        @Query("before") before: String?
     ): Deferred<MetadataAwareResponse<PSTerminalSize>>
 
     @GET("packages")
@@ -50,7 +67,8 @@ interface NetworkApiClient {
         @Query("number") number: String?,
         @Query("external_id") externalId: String?,
         @Query("is_paid") isPaid: Boolean?,
-        @Query("is_receiver") isReceiver: Boolean?
+        @Query("is_receiver") isReceiver: Boolean?,
+        @Query("courier_company_id") courierCompanyId: String?
     ): Deferred<MetadataAwareResponse<PSPackage>>
 
     @GET("packages/{package_id}")

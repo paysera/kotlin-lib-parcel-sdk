@@ -43,7 +43,7 @@ open class BaseTest {
     @BeforeAll
     open fun setUp() {
         apiClient = NetworkApiFactory(
-            baseUrl = "https://parcel-api.paysera.net/public/rest/v1/",
+            baseUrl = "https://lockers-sandbox-api.paysera.com/public/rest/v1/",
             locale = "lt",
             userAgent = userAgent,
             credentials = apiCredentials,

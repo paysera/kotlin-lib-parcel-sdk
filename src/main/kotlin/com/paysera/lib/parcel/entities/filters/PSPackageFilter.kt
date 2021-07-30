@@ -1,7 +1,6 @@
 package com.paysera.lib.parcel.entities.filters
 
 import com.google.gson.annotations.SerializedName
-import com.paysera.lib.common.entities.BaseFilter
 import com.paysera.lib.parcel.entities.enums.PSPackageStatus
 
 class PSPackageFilter(
@@ -15,13 +14,15 @@ class PSPackageFilter(
     val externalId: String? = null,
     val isPaid: Boolean? = null,
     val isReceiver: Boolean? = null,
+    courierCompanyId: String? = null,
     offset: Int? = null,
     limit: Int? = null,
     orderBy: String? = null,
     orderDirection: String? = null,
     after: String? = null,
     before: String? = null
-) : BaseFilter(
+) : PSBaseCompanyFilter(
+    courierCompanyId = courierCompanyId,
     offset = offset,
     limit = limit,
     orderBy = orderBy,

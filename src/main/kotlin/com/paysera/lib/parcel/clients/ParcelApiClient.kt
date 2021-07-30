@@ -4,6 +4,7 @@ import com.paysera.lib.common.retrofit.ApiRequestManager
 import com.paysera.lib.common.retrofit.BaseApiClient
 import com.paysera.lib.parcel.entities.PSCourierCompanyTokenRequest
 import com.paysera.lib.parcel.entities.PSPackageRequest
+import com.paysera.lib.parcel.entities.filters.PSBaseCompanyFilter
 import com.paysera.lib.parcel.entities.filters.PSPackageFilter
 import com.paysera.lib.parcel.entities.filters.PSPackagePriceFilter
 import com.paysera.lib.parcel.entities.filters.PSTerminalsFilter
@@ -18,6 +19,9 @@ class ParcelApiClient(
 
     fun getTerminals(filter: PSTerminalsFilter) = networkApiClient.getTerminals(
         filter.country,
+        filter.city,
+        filter.address,
+        filter.courierCompanyId,
         filter.limit,
         filter.offset,
         filter.orderBy,
@@ -28,11 +32,30 @@ class ParcelApiClient(
 
     fun getTerminal(terminalId: String) = networkApiClient.getTerminal(terminalId)
 
-    fun getTerminalCells(terminalId: String) = networkApiClient.getTerminalCells(terminalId)
+    fun getTerminalCells(terminalId: String, filter: PSBaseCompanyFilter) = networkApiClient.getTerminalCells(
+        terminalId,
+        filter.courierCompanyId,
+        filter.limit,
+        filter.offset,
+        filter.orderBy,
+        filter.orderDirection,
+        filter.after,
+        filter.before
+    )
 
-    fun getTerminalSizes(terminalId: String) = networkApiClient.getTerminalSizes(terminalId)
+    fun getTerminalSizes(terminalId: String, filter: PSBaseCompanyFilter) = networkApiClient.getTerminalSizes(
+        terminalId,
+        filter.courierCompanyId,
+        filter.limit,
+        filter.offset,
+        filter.orderBy,
+        filter.orderDirection,
+        filter.after,
+        filter.before
+    )
 
     fun getPackages(filter: PSPackageFilter) = networkApiClient.getPackages(
+        courierCompanyId = filter.courierCompanyId,
         offset = filter.offset,
         limit = filter.limit,
         orderBy = filter.orderBy,
