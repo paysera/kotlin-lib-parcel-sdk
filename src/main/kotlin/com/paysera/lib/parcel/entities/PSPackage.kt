@@ -25,7 +25,8 @@ data class PSPackage(
     val statusChanges: MetadataAwareResponse<PSStatusChange>,
     val paidAt: Date?,
     val createdAt: Date,
-    val updatedAt: Date?
+    val updatedAt: Date?,
+    val storeUntil: Date?
 ) {
     val status: PSPackageStatus? = null
         get() {
