@@ -114,5 +114,7 @@ class ParcelApiClient(
 
     fun returnPackage(packageId: String) = networkApiClient.returnPackage(packageId)
 
+    fun cancelPackage(packageId: String) = networkApiClient.cancelPackage(packageId)
+
     fun refreshToken(request: PSCourierCompanyTokenRequest) = networkApiClient.refreshToken(request)
 }

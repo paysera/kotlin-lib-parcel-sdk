@@ -122,6 +122,11 @@ interface NetworkApiClient {
         @Path("package_id") packageId: String
     ): Deferred<PSPackage>
 
+    @PUT("packages/{package_id}/cancel")
+    fun cancelPackage(
+        @Path("package_id") packageId: String
+    ): Deferred<PSPackage>
+
     @POST("packages")
     fun registerPackage(
         @Body packageRequest: PSPackageRequest

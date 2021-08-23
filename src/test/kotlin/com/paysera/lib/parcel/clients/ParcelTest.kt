@@ -2,7 +2,6 @@ package com.paysera.lib.parcel.clients
 
 import com.paysera.lib.parcel.entities.PSCourierCompanyTokenRequest
 import com.paysera.lib.parcel.entities.PSPackageRequest
-import com.paysera.lib.parcel.entities.enums.PSPackageStatus
 import com.paysera.lib.parcel.entities.filters.PSBaseCompanyFilter
 import com.paysera.lib.parcel.entities.filters.PSPackageFilter
 import com.paysera.lib.parcel.entities.filters.PSPackagePriceFilter
@@ -171,6 +170,12 @@ internal class ParcelTest : BaseTest() {
     @Test
     fun returnPackage() {
         val response = apiClient.returnPackage(packageId).runCatchingBlocking()
+        assert(response.isSuccess)
+    }
+
+    @Test
+    fun cancelPackage() {
+        val response = apiClient.cancelPackage(packageId).runCatchingBlocking()
         assert(response.isSuccess)
     }
 
