@@ -10,7 +10,7 @@ data class PSPackageRequest(
     val receiverLanguage: String? = null,
     val sourceTerminalId: String? = null,
     val destinationTerminalId: String? = null,
-    val size: String? = null,
+    val cellSizeId: String? = null,
     val cellId: String? = null,
     val externalId: String? = null,
     val sendNotifications: Boolean? = null,

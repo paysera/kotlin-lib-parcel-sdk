@@ -76,8 +76,6 @@ class ParcelApiClient(
 
     fun getPackageStatusChanges(packageId: String) = networkApiClient.getPackageStatusChanges(packageId)
 
-    fun getCellSizes() = networkApiClient.getCellSizes()
-
     fun getPrice(filter: PSPackagePriceFilter) = networkApiClient.getPrice(
         filter.cellSize,
         filter.limit,
@@ -115,6 +113,8 @@ class ParcelApiClient(
     fun returnPackage(packageId: String) = networkApiClient.returnPackage(packageId)
 
     fun cancelPackage(packageId: String) = networkApiClient.cancelPackage(packageId)
+
+    fun cancelPreviousAction(packageId: String) = networkApiClient.cancelPreviousAction(packageId)
 
     fun refreshToken(request: PSCourierCompanyTokenRequest) = networkApiClient.refreshToken(request)
 }

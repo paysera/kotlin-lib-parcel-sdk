@@ -81,9 +81,6 @@ interface NetworkApiClient {
         @Path("package_id") packageId: String
     ): Deferred<MetadataAwareResponse<PSStatusChange>>
 
-    @GET("cell-sizes")
-    fun getCellSizes(): Deferred<MetadataAwareResponse<PSCellSize>>
-
     @GET("price")
     fun getPrice(
         @Query("cell_size") cellSize: String,
@@ -126,6 +123,11 @@ interface NetworkApiClient {
     fun cancelPackage(
         @Path("package_id") packageId: String
     ): Deferred<PSPackage>
+
+    @PUT("packages/{package_id}/cancel-action")
+    fun cancelPreviousAction(
+        @Path("package_id") packageId: String
+    ): Deferred<Response<Void>>
 
     @POST("packages")
     fun registerPackage(

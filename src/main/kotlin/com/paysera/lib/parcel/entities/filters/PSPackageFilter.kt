@@ -5,6 +5,7 @@ import com.paysera.lib.parcel.entities.enums.PSPackageStatus
 
 class PSPackageFilter(
     val statuses: List<PSPackageStatus>? = null,
+    val receiverEmail: String? = null,
     val receiverPhonePart: String? = null,
     @SerializedName("created_at_from")
     val fromCreatedAt: String? = null,
@@ -14,6 +15,8 @@ class PSPackageFilter(
     val externalId: String? = null,
     val isPaid: Boolean? = null,
     val isReceiver: Boolean? = null,
+    val sourceTerminalId: String? = null,
+    val destinationTerminalId: String? = null,
     courierCompanyId: String? = null,
     offset: Int? = null,
     limit: Int? = null,

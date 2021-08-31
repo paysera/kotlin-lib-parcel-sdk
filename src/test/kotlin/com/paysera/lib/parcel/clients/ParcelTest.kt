@@ -21,15 +21,15 @@ internal class ParcelTest : BaseTest() {
 
     private val packageRequest = PSPackageRequest(
         senderName = "",
-        senderPhone = "+3709989898",
+        senderPhone = "+",
         senderEmail = "",
         receiverName = "Receiver Name",
-        receiverPhone = "+3709989898",
+        receiverPhone = "+",
         receiverEmail = "receiver@email.com",
         receiverLanguage = "LT",
         sourceTerminalId = "",
         destinationTerminalId = "",
-        size = "s",
+        cellSizeId = "",
         cellId = "",
         externalId = "",
         sendNotifications = null,
@@ -44,7 +44,7 @@ internal class ParcelTest : BaseTest() {
 
     @Test
     fun getTerminals() {
-        val filter = PSTerminalsFilter(courierCompanyId = courierCompany)
+        val filter = PSTerminalsFilter()
         val response = apiClient.getTerminals(filter).runCatchingBlocking()
         val result = response.getOrNull()
         assert(response.isSuccess)
@@ -77,7 +77,6 @@ internal class ParcelTest : BaseTest() {
     @Test
     fun getPackages() {
         val filter = PSPackageFilter(
-            externalId = "",
             courierCompanyId = courierCompany
         )
         val response = apiClient.getPackages(filter).runCatchingBlocking()
@@ -93,14 +92,6 @@ internal class ParcelTest : BaseTest() {
     @Test
     fun getPackageStatusChanges() {
         val response = apiClient.getPackageStatusChanges(packageId).runCatchingBlocking()
-        val result = response.getOrNull()
-        assert(response.isSuccess)
-        assert(result?.items?.size != null)
-    }
-
-    @Test
-    fun getCellSizes() {
-        val response = apiClient.getCellSizes().runCatchingBlocking()
         val result = response.getOrNull()
         assert(response.isSuccess)
         assert(result?.items?.size != null)
@@ -176,6 +167,12 @@ internal class ParcelTest : BaseTest() {
     @Test
     fun cancelPackage() {
         val response = apiClient.cancelPackage(packageId).runCatchingBlocking()
+        assert(response.isSuccess)
+    }
+
+    @Test
+    fun cancelPreviousAction() {
+        val response = apiClient.cancelPreviousAction(packageId).runCatchingBlocking()
         assert(response.isSuccess)
     }
 

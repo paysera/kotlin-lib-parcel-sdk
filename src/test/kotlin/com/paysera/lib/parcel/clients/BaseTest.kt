@@ -20,7 +20,7 @@ open class BaseTest {
     companion object {
         private val userAgent = "okhttp/3.12.1"
         private val apiCredentials = ApiCredentials(
-            "insert_here",
+            "insert_me",
             120000
         )
         private val timeout: Long? = null
@@ -43,11 +43,11 @@ open class BaseTest {
     @BeforeAll
     open fun setUp() {
         apiClient = NetworkApiFactory(
-            baseUrl = "https://lockers-sandbox-api.paysera.com/public/rest/v1/",
+            baseUrl = "https://lockers-api.paysera.com/public/rest/v1/",
             locale = "lt",
             userAgent = userAgent,
             credentials = apiCredentials,
-            certifiedHosts = listOf("lockers-sandbox-api.paysera.com"),
+            certifiedHosts = listOf("lockers-api.paysera.com"),
             timeout = timeout,
             httpLoggingInterceptorLevel = loggingLevel,
             errorLogger = errorLoggerInterface

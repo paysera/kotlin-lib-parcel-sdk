@@ -1,5 +1,6 @@
 package com.paysera.lib.parcel.entities
 
+import com.google.gson.annotations.SerializedName
 import com.paysera.lib.common.entities.MetadataAwareResponse
 import com.paysera.lib.parcel.entities.enums.PSPackageStatus
 import org.joda.money.Money
@@ -18,7 +19,8 @@ data class PSPackage(
     val receiverLanguage: String?,
     val sourceTerminal: PSTerminal?,
     val destinationTerminal: PSTerminal?,
-    val size: String?,
+    @SerializedName("cell_size_object")
+    val cellSize: PSCellSize?,
     val cell: PSCell?,
     val price: Money?,
     val payment: PSPackagePayment?,
