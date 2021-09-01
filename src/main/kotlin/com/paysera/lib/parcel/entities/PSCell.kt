@@ -7,5 +7,5 @@ data class PSCell(
     var number: String,
     var size: String,
     var state: PSCellState? = null,
-    var pinCode: String? = null,
+    var pinCode: String? = null
 )
