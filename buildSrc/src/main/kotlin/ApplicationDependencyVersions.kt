@@ -5,8 +5,8 @@ object ApplicationDependencyVersions {
     const val loggingInterceptor = "4.7.2"
     const val gson = "2.8.6"
     const val jodaMoney = "0.12"
-    const val certificateTransparency = "0.3.0"
-    const val payseraCommonSdk = "2.6.1"
+    const val certificateTransparency = "1.0.0"
+    const val payseraCommonSdk = "2.7.0-SNAPSHOT"
     const val assertjCore = "3.19.0"
     const val jupiter = "5.7.2"
 }
