@@ -1,7 +1,7 @@
 package com.paysera.lib.parcel.retrofit
 
 import com.paysera.lib.parcel.clients.ParcelApiClient
-import com.paysera.lib.common.entities.ApiCredentials
+import com.paysera.lib.common.interfaces.BaseApiCredentials
 import com.paysera.lib.common.interfaces.ErrorLoggerInterface
 import com.paysera.lib.common.interfaces.TokenRefresherInterface
 import com.paysera.lib.common.retrofit.BaseApiFactory
@@ -11,7 +11,7 @@ class NetworkApiFactory(
     baseUrl: String,
     locale: String?,
     userAgent: String?,
-    credentials: ApiCredentials,
+    credentials: BaseApiCredentials,
     certifiedHosts: List<String> = emptyList(),
     timeout: Long? = null,
     httpLoggingInterceptorLevel: HttpLoggingInterceptor.Level = HttpLoggingInterceptor.Level.BASIC,
