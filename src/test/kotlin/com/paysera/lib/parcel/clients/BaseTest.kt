@@ -1,6 +1,6 @@
 package com.paysera.lib.parcel.clients
 
-import com.paysera.lib.common.entities.ApiCredentials
+import com.paysera.lib.common.entities.AuthorizationApiCredentials
 import com.paysera.lib.common.exceptions.ApiError
 import com.paysera.lib.common.interfaces.ErrorLoggerInterface
 import com.paysera.lib.common.interfaces.TokenRefresherInterface
@@ -19,7 +19,7 @@ open class BaseTest {
 
     companion object {
         private val userAgent = "okhttp/3.12.1"
-        private val apiCredentials = ApiCredentials(
+        private val apiCredentials = AuthorizationApiCredentials(
             "insert_me",
             120000
         )
