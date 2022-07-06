@@ -47,7 +47,6 @@ open class BaseTest {
             locale = "lt",
             userAgent = userAgent,
             credentials = apiCredentials,
-            certifiedHosts = listOf("lockers-api.paysera.com"),
             timeout = timeout,
             httpLoggingInterceptorLevel = loggingLevel,
             errorLogger = errorLoggerInterface
