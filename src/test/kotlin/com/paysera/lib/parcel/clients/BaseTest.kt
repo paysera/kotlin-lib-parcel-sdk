@@ -49,7 +49,8 @@ open class BaseTest {
             credentials = apiCredentials,
             timeout = timeout,
             httpLoggingInterceptorLevel = loggingLevel,
-            errorLogger = errorLoggerInterface
+            errorLogger = errorLoggerInterface,
+            certificateInterceptor = null
         ).createClient(tokenRefresher)
     }
 
