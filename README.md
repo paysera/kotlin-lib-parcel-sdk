@@ -1,1 +1,1 @@
-# kotlin-lib-parcel-sdk
+# Paysera Kotlin Parcel SDK [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.paysera.lib/kotlin-lib-parcel-sdk/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.paysera.lib/kotlin-lib-parcel-sdk)
