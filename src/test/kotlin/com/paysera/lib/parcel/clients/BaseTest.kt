@@ -22,7 +22,9 @@ open class BaseTest {
         private val apiCredentials = PayseraApiCredentials(
             "insert_me",
             120000
-        )
+        ).apply {
+            locale = "lt"
+        }
         private val timeout: Long? = null
         private val loggingLevel = HttpLoggingInterceptor.Level.BODY
 
@@ -44,7 +46,6 @@ open class BaseTest {
     open fun setUp() {
         apiClient = NetworkApiFactory(
             baseUrl = "https://lockers-api.paysera.com/public/rest/v1/",
-            locale = "lt",
             userAgent = userAgent,
             credentials = apiCredentials,
             timeout = timeout,
