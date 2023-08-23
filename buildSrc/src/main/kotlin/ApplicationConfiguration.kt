@@ -1,7 +1,8 @@
 object ApplicationConfiguration {
     const val artifactId = "kotlin-lib-parcel-sdk"
     const val groupId = "com.paysera.lib"
-    const val version = "1.1.18"
+    // can be changed once other PRs were merged
+    const val version = "1.1.20"
     const val name = "Kotlin Library Parcel SDK"
     const val url = "https://www.paysera.com/v2/en-GB/index"
     const val description = "Paysera: Kotlin Parcel SDK Library"
